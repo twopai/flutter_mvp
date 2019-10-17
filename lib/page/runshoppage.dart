@@ -95,7 +95,7 @@ class _RunShopPageState extends BaseState<RunShopPage, RunShopPresenter> impleme
                     }));
                   },
                   child: Text('进入第二页',
-                    style: TextStyle(fontSize: ScreenUtil(allowFontScaling: false).setSp(14)),
+                    style: TextStyle(fontSize: ScreenUtil(allowFontScaling: true).setSp(14)),
                   )
               ),
             )
