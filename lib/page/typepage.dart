@@ -25,9 +25,8 @@ class _TypePageState extends BaseState<TypePage, TypePresenter> implements TypeV
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  void initData() {
+    // TODO: implement initData
     _getData();
   }
 
@@ -35,16 +34,30 @@ class _TypePageState extends BaseState<TypePage, TypePresenter> implements TypeV
     Map<String, dynamic> params = new Map();
     _presenter.shopList(params);
   }
-
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
+  Widget buildUi(BuildContext context) {
+    // TODO: implement buildUi
     return Scaffold(
       appBar: AppBar(
         title: Text('$TAG'),
       ),
       body: Center(
-        child: Text("获取的数据：\n${_typeEntity == null ? "" : _typeEntity?.xList.map((item)=>item.name).toList()}"),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 50,
+              child: Text('点击空白处类似iOS关闭键盘'),
+            ),
+            //输入框
+            TextField(),
+            //数据
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Text("获取的数据：\n${_typeEntity == null ? "" : _typeEntity?.xList.map((item)=>item.name).toList()}"),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -61,4 +74,8 @@ class _TypePageState extends BaseState<TypePage, TypePresenter> implements TypeV
     _typeEntity = data;
     setState(() {});
   }
+
+
+
+
 }

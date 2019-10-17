@@ -9,13 +9,24 @@ abstract class BaseState<T extends StatefulWidget, V extends BasePresenter>
   void initState() {
     // TODO: implement initState
     super.initState();
+    //初始化配置
+    initConfig();
+    //初始化Presenter，且Presenter也可以监听，故写在初始化监听之前
     _basePresenter = createPresenter();
+    //初始化监听
+    initLisener();
+    //初始化数据
+    initData();
+
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container();
+    return GestureDetector(
+      onTap: ()=>FocusScope.of(context).requestFocus(FocusNode()),
+      child: buildUi(context),
+    );
   }
 
   @override
@@ -28,6 +39,10 @@ abstract class BaseState<T extends StatefulWidget, V extends BasePresenter>
   }
 
   V createPresenter();
+  void initConfig(){}
+  void initLisener(){}
+  void initData(){}
+  Widget buildUi(BuildContext context);
 
   /**
    * 显示加载进度框
@@ -63,4 +78,6 @@ abstract class BaseState<T extends StatefulWidget, V extends BasePresenter>
   dissProgress() {
     Navigator.pop(context);
   }
+
+
 }
