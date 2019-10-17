@@ -33,7 +33,7 @@ class _RunShopPageState extends BaseState<RunShopPage, RunShopPresenter> impleme
   @override
   void initData() {
     // TODO: implement initData
-    _getData();
+
   }
 
   @override
@@ -49,36 +49,34 @@ class _RunShopPageState extends BaseState<RunShopPage, RunShopPresenter> impleme
   @override
   Widget buildUi(BuildContext context) {
     // TODO: implement buildUi
-    return WillPopScope(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('RunShopPage'),
-        ),
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              Text('获取的数据：-->\n\n${_runshopEntity == null ? "" : _runshopEntity?.xList.map((item)=>item.title).toList()}'),
-              Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return TypePage();
-                      }));
-                    },
-                    child: Text('进入第二页')),
-              )
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Text('点击加载中'),
-          onPressed: () {
-            showProgress(msg: '加载中...');
-          },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('RunShopPage'),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Text('获取的数据：-->\n\n${_runshopEntity == null ? "" : _runshopEntity?.xList.map((item)=>item.title).toList()}'),
+            Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: FlatButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return TypePage();
+                    }));
+                  },
+                  child: Text('进入第二页')),
+            )
+          ],
         ),
       ),
-      onWillPop: ()=>_close(),
+      floatingActionButton: FloatingActionButton(
+        child: Text('点击加载中'),
+        onPressed: () {
+          _getData();
+          showProgress(msg: '加载中...');
+        },
+      ),
     );
   }
 
@@ -87,25 +85,18 @@ class _RunShopPageState extends BaseState<RunShopPage, RunShopPresenter> impleme
 //    // TODO: implement build
 //    return ;
 //  }
-  /**
-   * 关闭加载框
-   */
-  _close() {
-    print('$TAG-->关闭加载框');
-//    dissProgress();
-  }
   @override
   void newsListError(int status, String message) {
     print('$TAG-->newsListError-->status=$status,message=$message');
+//    dissProgress();
   }
 
   @override
   void newsListSuccess(int status, String message, RunshopEntity data) {
+//    dissProgress();
     print('$TAG-->newsListSuccess-->status=$status,message=$message,\ndata=${data.toString()}');
     if (data == null) return;
     _runshopEntity = data;
     setState(() {});
   }
-
-
 }
