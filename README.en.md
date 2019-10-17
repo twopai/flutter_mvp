@@ -1,7 +1,7 @@
 # flutter_mvp
 
 #### 介绍
-flutter的mvp封装！
+flutter的mvp简单封装！
 
 #### 项目说明
 1. 类似于Android的mvp简单封装
